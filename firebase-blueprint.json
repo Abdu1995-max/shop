@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique identifier for the user" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "displayName": { "type": "string", "description": "User's display name" },
+        "photoURL": { "type": "string", "description": "User's profile picture URL" },
+        "role": { "type": "string", "enum": ["user", "admin"], "description": "User's role in the system" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "User order information",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "description": "Unique identifier for the order" },
+        "userId": { "type": "string", "description": "ID of the user who placed the order" },
+        "productId": { "type": "integer", "description": "ID of the product ordered" },
+        "productName": { "type": "string", "description": "Name of the product ordered" },
+        "quantity": { "type": "integer", "description": "Quantity of the product ordered" },
+        "totalPrice": { "type": "number", "description": "Total price of the order" },
+        "status": { "type": "string", "enum": ["pending", "shipped", "delivered", "cancelled"], "description": "Order status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Order placement timestamp" }
+      },
+      "required": ["orderId", "userId", "productId", "productName", "quantity", "totalPrice", "status", "createdAt"]
+    },
+    "AdminSession": {
+      "title": "Admin Session",
+      "description": "Information about the active admin session",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the active admin" },
+        "email": { "type": "string", "description": "Email of the active admin" },
+        "sessionId": { "type": "string", "description": "Unique session identifier" },
+        "lastActive": { "type": "string", "format": "date-time", "description": "Last activity timestamp" }
+      },
+      "required": ["uid", "email", "sessionId", "lastActive"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of user orders"
+    },
+    "/admin_sessions/{sessionId}": {
+      "schema": "AdminSession",
+      "description": "Active admin sessions"
+    }
+  }
+}

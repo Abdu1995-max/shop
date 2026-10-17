@@ -1,0 +1,5 @@
+{
+  "name": "Modern Product Showcase",
+  "description": "A clean, responsive product display page with a Node.js backend and SQLite database.",
+  "requestFramePermissions": []
+}
